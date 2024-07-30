@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-df = pd.read_csv('Project Scripts/microSWIFT-dashboard/mission_ids.csv')
+df = pd.read_csv('microSWIFT-Dashboard/mission_ids.csv')
 df.set_index(['Mission'], inplace=True)
 
 def get_missions():

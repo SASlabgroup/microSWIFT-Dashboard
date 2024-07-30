@@ -10,13 +10,17 @@ from graphs import multi_graphs, single_graphs
 # Initialize the Dash app
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
+app.title = 'Dashboard'
+
+server = app.server
+
 # Define the layout of the app
 app.layout = html.Div([
     dbc.Row([
         dbc.Col(
             html.Div([
                 html.H1(['MicroSWIFT', html.Br(), 'Dashboard']),
-                html.Img(src='/assets/SWIFTlogo_r.png', width="150", height="150"),
+                html.Img(src='assets/SWIFTlogo_r.png', width="150", height="150"),
                 html.Hr(),
                 dcc.Dropdown(
                     options=get_missions(),
