@@ -3,10 +3,37 @@ import plotly.express as px
 from spectrogram_plot import spectrogram
 
 def multi_graphs(df):
-    position_temperature = px.scatter(df, x='longitude', y='latitude', color='temperature', title='Temperature by Position',)
-    position_salinity = px.scatter(df, x='longitude', y='latitude', color='salinity', title='Salinity by Position')
-    position_height = px.scatter(df, x='longitude', y='latitude', color='significant_height', title='Wave Height by Position')
+    hover_data = {'time': True}  # Add time to the hover data
+
+    position_temperature = px.scatter(
+        df,
+        x='longitude',
+        y='latitude',
+        color='temperature',
+        title='Temperature by Position',
+        hover_data=hover_data
+    )
+
+    position_salinity = px.scatter(
+        df,
+        x='longitude',
+        y='latitude',
+        color='salinity',
+        title='Salinity by Position',
+        hover_data=hover_data
+    )
+
+    position_height = px.scatter(
+        df,
+        x='longitude',
+        y='latitude',
+        color='significant_height',
+        title='Wave Height by Position',
+        hover_data=hover_data
+    )
+
     return position_temperature, position_salinity, position_height
+
 
 def single_graphs(df, buoy_id, selected_time_str):
     # Time Series Graphs
@@ -15,9 +42,35 @@ def single_graphs(df, buoy_id, selected_time_str):
     wave_height = px.line(df, x='time', y='significant_height', title='Wave Height Over Time')
             
     # Position Graphs
-    position_temp = px.scatter(df, x='longitude', y='latitude', color='temperature', title='Temperature by Position')
-    position_salinity = px.scatter(df, x='longitude', y='latitude', color='salinity', title='Salinity by Position')
-    position_height = px.scatter(df, x='longitude', y='latitude', color='significant_height', title='Wave Height by Position')
+    hover_data = {'time': True}  # Add time to the hover data
+
+    position_temperature = px.scatter(
+        df,
+        x='longitude',
+        y='latitude',
+        color='temperature',
+        title='Temperature by Position',
+        hover_data=hover_data
+    )
+
+    position_salinity = px.scatter(
+        df,
+        x='longitude',
+        y='latitude',
+        color='salinity',
+        title='Salinity by Position',
+        hover_data=hover_data
+    )
+
+    position_height = px.scatter(
+        df,
+        x='longitude',
+        y='latitude',
+        color='significant_height',
+        title='Wave Height by Position',
+        hover_data=hover_data
+    )
+
 
     # Frequency vs Energy Graphs
     selected_time = pd.to_datetime(selected_time_str)
@@ -32,4 +85,4 @@ def single_graphs(df, buoy_id, selected_time_str):
     # Spectrogram
     spectrogram_fig = spectrogram(df)
 
-    return (peak_direction, peak_period, wave_height, position_temp, position_salinity, position_height, loglog, linear, spectrogram_fig)
+    return (peak_direction, peak_period, wave_height, position_temperature, position_salinity, position_height, loglog, linear, spectrogram_fig)
