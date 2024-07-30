@@ -8,7 +8,7 @@ df.set_index(['Mission'], inplace=True)
 def get_missions():
     """
     Get a list of mission options for dropdowns.
-
+s
     Returns:
         list: List of dictionaries with 'label' and 'value' for each mission.
     """
