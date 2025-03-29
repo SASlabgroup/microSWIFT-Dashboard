@@ -3,9 +3,9 @@ name: Build and Push Image
 on:
   push:
     branches: [ main ]
-  pull_request:
+  pull_request: 
+    types: [closed]
     branches: [ main ]
-  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
@@ -13,7 +13,8 @@ env:
 
 jobs:
   build:
-    runs-on: integration-server
+    if: github.event.pull_request.merged == true
+    runs-on: [self-hosted, linux, integration-server]
     # Add permissions needed for GitHub Container Registry
     permissions:
       contents: read
