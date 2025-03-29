@@ -51,6 +51,15 @@ To run the application locally:
   </li>
 </ul>
 
+# Running in a Container
+To run the application in a container install a Docker compatible container system (ie: Docker or Podman). Then within this directory run
+```shell
+docker-compose up
+```
+```shell
+podman-compose up
+```
+
 # Deployment
 While Dash recommends using Heroku for deployment, we suggest using Render for its simplicity. For deployment on Render, follow their <a href="https://github.com/thusharabandara/dash-app-render-deployment">deployment guide</a>. <b>Note:</b> You will need to create a Render account.
 
