@@ -13,7 +13,7 @@ env:
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true
+    if: ${{ vars.BUILD_AND_PUSH == 'true' }} && github.event.pull_request.merged == true
     runs-on:
       group: Public Repo Runners
       labels: [ubuntu-latest]
