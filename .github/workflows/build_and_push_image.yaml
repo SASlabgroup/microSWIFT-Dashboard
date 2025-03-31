@@ -1,9 +1,8 @@
 name: Build and Push Image
 
 on:
-  pull_request: 
-    types: [closed]
-    branches: [ main ]
+  push: 
+    branches: [ latest ]
 
 env:
   REGISTRY: ghcr.io
@@ -11,7 +10,7 @@ env:
 
 jobs:
   build:
-    if: ${{ vars.BUILD_AND_PUSH == 'true' }} && github.event.pull_request.merged == true
+    if: ${{ vars.BUILD_AND_PUSH == 'true' }}
     runs-on:
       group: Public Repo Runners
       labels: [ubuntu-latest]
