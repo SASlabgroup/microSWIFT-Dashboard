@@ -37,7 +37,7 @@ def multi_graphs(df):
 
 def single_graphs(df, buoy_id, selected_time_str):
     # Time Series Graphs
-    peak_direction = px.line(df, x='time', y='peak_direction', title='Peak Direction Over Time')
+    #peak_direction = px.line(df, x='time', y='peak_direction', title='Peak Direction Over Time')
     peak_period = px.line(df, x='time', y='peak_period', title='Peak Period Over Time')
     wave_height = px.line(df, x='time', y='significant_height', title='Wave Height Over Time')
             
@@ -85,4 +85,6 @@ def single_graphs(df, buoy_id, selected_time_str):
     # Spectrogram
     spectrogram_fig = spectrogram(df)
 
-    return (peak_direction, peak_period, wave_height, position_temperature, position_salinity, position_height, loglog, linear, spectrogram_fig)
+    # FIXME: Don't use positional returns, makes it hard to add and remove items
+    # return (peak_direction, peak_period, wave_height, position_temperature, position_salinity, position_height, loglog, linear, spectrogram_fig)
+    return (peak_period, wave_height, position_temperature, position_salinity, position_height, loglog, linear, spectrogram_fig)

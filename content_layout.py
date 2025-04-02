@@ -31,9 +31,9 @@ single_layout = [
     dbc.Row([
         dbc.Col([
             html.H2('Time Series'),
-            dbc.Card(
-                dcc.Graph(id='peak_direction_single')
-            ),
+            # dbc.Card(
+            #     dcc.Graph(id='peak_direction_single')
+            # ),
             dbc.Card(
                 dcc.Graph(id='peak_period_single')
             ),
