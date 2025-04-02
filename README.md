@@ -57,7 +57,7 @@ To run the application in a container install a Docker compatible container syst
 docker-compose up
 ```
 ```shell
-podman-compose up
+podman compose up
 ```
 
 # Deployment
