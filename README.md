@@ -65,6 +65,8 @@ While Dash recommends using Heroku for deployment, we suggest using Render for i
 
 If deploying on a private server, we recommend using Gunicorn for serving the application. <a href="https://gunicorn.org/">Learn more about Gunicorn here</a>.
 
+Alternatively, this app can deployed using the provided [container image](https://github.com/SASlabgroup/microSWIFT-Dashboard/pkgs/container/microswift-dashboard).
+
 # Adding a New Mission
 To add a new mission:
 
