@@ -51,10 +51,21 @@ To run the application locally:
   </li>
 </ul>
 
+# Running in a Container
+To run the application in a container install a Docker compatible container system (ie: Docker or Podman). Then within this directory run
+```shell
+docker-compose up
+```
+```shell
+podman-compose up
+```
+
 # Deployment
 While Dash recommends using Heroku for deployment, we suggest using Render for its simplicity. For deployment on Render, follow their <a href="https://github.com/thusharabandara/dash-app-render-deployment">deployment guide</a>. <b>Note:</b> You will need to create a Render account.
 
 If deploying on a private server, we recommend using Gunicorn for serving the application. <a href="https://gunicorn.org/">Learn more about Gunicorn here</a>.
+
+Alternatively, this app can deployed using the provided [container image](https://github.com/SASlabgroup/microSWIFT-Dashboard/pkgs/container/microswift-dashboard).
 
 # Adding a New Mission
 To add a new mission:
