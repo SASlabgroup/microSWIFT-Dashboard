@@ -28,7 +28,7 @@ def get_missions_ids(mission):
     Returns:
         list: List of buoy IDs.
     """
-    ids = df.loc[mission]["Bouy_ids"].split()
+    ids = df.loc[mission]["Buoy_ids"].split()
     return ids
 
 
