@@ -2,19 +2,21 @@
 
 import pandas as pd
 
-df = pd.read_csv('mission_ids.csv')
-df.set_index(['Mission'], inplace=True)
+df = pd.read_csv("mission_ids.csv")
+df.set_index(["Mission"], inplace=True)
+
 
 def get_missions():
     """
-    Get a list of mission options for dropdowns.
-s
-    Returns:
-        list: List of dictionaries with 'label' and 'value' for each mission.
+        Get a list of mission options for dropdowns.
+    s
+        Returns:
+            list: List of dictionaries with 'label' and 'value' for each mission.
     """
     missions = df.index
-    options = [{'label': mission, 'value': mission} for mission in missions]
+    options = [{"label": mission, "value": mission} for mission in missions]
     return options
+
 
 def get_missions_ids(mission):
     """
@@ -26,8 +28,9 @@ def get_missions_ids(mission):
     Returns:
         list: List of buoy IDs.
     """
-    ids = df.loc[mission]['Bouy_ids'].split()
+    ids = df.loc[mission]["Bouy_ids"].split()
     return ids
+
 
 def get_mission_time(mission):
     """
@@ -39,9 +42,9 @@ def get_mission_time(mission):
     Returns:
         tuple: Start and end times as datetime objects. End time can be None if not available.
     """
-    start = pd.Timestamp(df.loc[mission]['Starttime'])
-    end = df.loc[mission]['Endtime'].strip()
-    if end == 'None':
+    start = pd.Timestamp(df.loc[mission]["Starttime"])
+    end = df.loc[mission]["Endtime"].strip()
+    if end == "None":
         return start, None
     end = pd.Timestamp(end)
     return start, end

@@ -2,6 +2,7 @@ import pandas as pd
 import microSWIFTtelemetry
 from data_cleaning import clean_data
 
+
 def get_swift_data(buoy_ids, start_date, end_date=None):
     """
     Retrieve SWIFT data for given buoy IDs starting from a specified date.
@@ -21,13 +22,17 @@ def get_swift_data(buoy_ids, start_date, end_date=None):
 
     for buoy_id in buoy_ids:
         if end_date is None:
-            data, error = microSWIFTtelemetry.pull_telemetry_as_var(buoy_id, start_date, var_type='pandas')
+            data, error = microSWIFTtelemetry.pull_telemetry_as_var(
+                buoy_id, start_date, var_type="pandas"
+            )
         else:
-            data, error = microSWIFTtelemetry.pull_telemetry_as_var(buoy_id, start_date, end_date, var_type='pandas')
+            data, error = microSWIFTtelemetry.pull_telemetry_as_var(
+                buoy_id, start_date, end_date, var_type="pandas"
+            )
 
         if len(data) != 0:
-            data['Buoy ID'] = buoy_id
-            data['time'] = data.index
+            data["Buoy ID"] = buoy_id
+            data["time"] = data.index
             data = clean_data(data)
             microSWIFT_df = pd.concat([microSWIFT_df, data], ignore_index=False)
         else:
@@ -37,8 +42,9 @@ def get_swift_data(buoy_ids, start_date, end_date=None):
         print("No valid data retrieved for buoy ID(s).")
         return None
 
-    microSWIFT_df.set_index(['Buoy ID', microSWIFT_df.index], inplace=True)
+    microSWIFT_df.set_index(["Buoy ID", microSWIFT_df.index], inplace=True)
     return microSWIFT_df
+
 
 def get_recent_data(df, buoy_id):
     """
@@ -52,7 +58,7 @@ def get_recent_data(df, buoy_id):
         pd.Series: The recent data for the specified buoy ID.
     """
     try:
-        buoy_data = df.xs(buoy_id, level='Buoy ID')
+        buoy_data = df.xs(buoy_id, level="Buoy ID")
         last_row = buoy_data.tail(1).squeeze()
         return last_row
     except KeyError:
