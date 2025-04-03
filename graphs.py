@@ -110,20 +110,20 @@ def get_single_graphs(df, buoy_id, selected_time_str) -> SingleGraphs:
         }
     )
 
-    loglog = px.line(
-        plot_df,
-        x="Frequency (Hz)",
-        y="Energy Density",
-        title="Energy Density vs. Frequency (LogLog)",
-        log_x=True,
-        log_y=True,
-    )
-    linear = px.line(
-        plot_df,
-        x="Frequency (Hz)",
-        y="Energy Density",
-        title="Energy Density vs. Frequency (Linear)",
-    )
+    # loglog = px.line(
+    #     plot_df,
+    #     x="Frequency (Hz)",
+    #     y="Energy Density",
+    #     title="Energy Density vs. Frequency (LogLog)",
+    #     log_x=True,
+    #     log_y=True,
+    # )
+    # linear = px.line(
+    #     plot_df,
+    #     x="Frequency (Hz)",
+    #     y="Energy Density",
+    #     title="Energy Density vs. Frequency (Linear)",
+    # )
 
     # Spectrogram
     spectrogram_fig = spectrogram(df)
@@ -133,7 +133,5 @@ def get_single_graphs(df, buoy_id, selected_time_str) -> SingleGraphs:
         position_temperature=position_temperature,
         position_salinity=position_salinity,
         position_height=position_height,
-        loglog=loglog,
-        linear=linear,
         spectrogram_fig=spectrogram_fig,
     )

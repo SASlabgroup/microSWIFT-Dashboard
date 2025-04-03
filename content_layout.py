@@ -51,17 +51,17 @@ single_layout = [
             )
         ]
     ),
-    dbc.Row(
-        [
-            dbc.Col(
-                [
-                    html.H2("Frequency v Energy"),
-                    dbc.Card(dcc.Graph("loglog_frequency_energy")),
-                    dbc.Card(dcc.Graph("linear_frequency_energy")),
-                ]
-            )
-        ]
-    ),
+    # dbc.Row(
+    #     [
+    #         dbc.Col(
+    #             [
+    #                 html.H2("Frequency v Energy"),
+    #                 dbc.Card(dcc.Graph("loglog_frequency_energy")),
+    #                 dbc.Card(dcc.Graph("linear_frequency_energy")),
+    #             ]
+    #         )
+    #     ]
+    # ),
     dbc.Row(
         [
             dbc.Col(
