@@ -33,9 +33,9 @@ single_layout = [
             # dbc.Card(
             #     dcc.Graph(id='peak_direction_single')
             # ),
-            dbc.Card(
-                dcc.Graph(id='peak_period_single')
-            ),
+            # dbc.Card(
+            #     dcc.Graph(id='peak_period_single')
+            # ),
             dbc.Card(
                 dcc.Graph(id='wave_height_single')
             )

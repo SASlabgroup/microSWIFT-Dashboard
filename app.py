@@ -1,5 +1,5 @@
 
-from dash import Dash, html, dcc, callback, Output, Input, no_update
+from dash import Dash, html, dcc, callback, Output, Input, no_update, ALL
 import dash_bootstrap_components as dbc
 
 
@@ -8,7 +8,7 @@ import pandas as pd
 from data_retrieval import get_swift_data
 from content_layout import single_layout, single_info_card, multi_layout, multi_info_card
 from card_elements import multi_card, single_card
-from graphs import multi_graphs, single_graphs
+from graphs import multi_graphs, get_single_graphs, SingleGraphs
 
 # Initialize the Dash app
 app = Dash(__name__, external_stylesheets=[
@@ -138,8 +138,8 @@ def update_time_dropdown(buoy_id, mission):
 
 @callback(
     [
-        #  Output('peak_direction_single', 'figure'),
-        Output('peak_period_single', 'figure'),
+        # Output('peak_direction_single', 'figure'),
+        # Output('peak_period_single', 'figure'),
         Output('wave_height_single', 'figure'), Output(
             'position_temperature_single', 'figure'),
         Output('position_salinity_single', 'figure'), Output(
@@ -154,26 +154,31 @@ def update_single(buoy_id, mission, selected_time_str):
     if buoy_id != 'All':
         start_date, end_date = get_mission_time(mission)
         df = get_swift_data([buoy_id], start_date, end_date)
+        single_graphs = SingleGraphs(wave_height=no_update, position_temperature=no_update,
+                                     position_salinity=no_update, position_height=no_update, loglog=no_update,
+                                     linear=no_update, spectrogram_fig=no_update)
         if df is not None:
-            # peak_direction, peak_period, wave_height, position_temp, position_salinity, position_height, loglog, linear, spectrogram_fig = single_graphs(df, buoy_id, selected_time_str)
-            peak_period, wave_height, position_temp, position_salinity, position_height, loglog, linear, spectrogram_fig = single_graphs(
-                df, buoy_id, selected_time_str)
+            single_graphs = get_single_graphs(df, buoy_id, selected_time_str)
             # Info Card
-            current_id = buoy_id
-            buoy_info = single_card(df, buoy_id)
+            single_graphs.current_id = buoy_id
+            single_graphs.buoy_info = single_card(df, buoy_id)
 
-            # FIXME: Don't use positional returns, makes it hard to add and remove items
-            # return (peak_direction, peak_period, wave_height, position_temp, position_salinity, position_height, loglog, linear, spectrogram_fig, current_id, buoy_info)
-            return (peak_period, wave_height, position_temp, position_salinity, position_height, loglog, linear, spectrogram_fig, current_id, buoy_info)
         elif df is None:
-            current_id = buoy_id
-            buoy_info = 'No valid data retrieved for buoy ID'
-            # FIXME: Don't use positional returns, makes it hard to add and remove items
-            # return no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, current_id, buoy_info
-            return no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, current_id, buoy_info
-    # FIXME: Don't use positional returns, makes it hard to add and remove items
-    # return no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update
-    return no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update
+            single_graphs.current_id = buoy_id
+            single_graphs.buoy_info = 'No valid data retrieved for buoy ID'
+    return [
+        # single_graphs.peak_direction,
+        # single_graphs.peak_period,
+        single_graphs.wave_height,
+        single_graphs.position_temperature,
+        single_graphs.position_salinity,
+        single_graphs.position_height,
+        single_graphs.loglog,
+        single_graphs.linear,
+        single_graphs.spectrogram_fig,
+        single_graphs.current_id,
+        single_graphs.buoy_info
+    ]
 
 
 if __name__ == '__main__':
