@@ -22,9 +22,8 @@ multi_layout = [
 ]
 
 multi_info_card = [html.H4('LATEST DATA'),
-                    html.Hr(),
-                    html.Div(id='buoy_time')]
-
+                   html.Hr(),
+                   html.Div(id='buoy_time')]
 
 
 single_layout = [
@@ -81,5 +80,3 @@ single_info_card = [html.H4('LATEST DATA'),
                     html.Hr(),
                     html.H2(id='current_value'),
                     html.P(id='buoy_info')]
-
-
