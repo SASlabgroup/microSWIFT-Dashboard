@@ -52,12 +52,27 @@ To run the application locally:
 </ul>
 
 # Running in a Container
+
+## Running a container built from source code
 To run the application in a container install a Docker compatible container system (ie: Docker or Podman). Then within this directory run
 ```shell
 docker-compose up
 ```
 ```shell
 podman compose up
+```
+
+## Running a pre-built container
+To run a pre-built container in Docker:
+```shell
+docker pull ghcr.io/apl-uw-software/microswift-dashboard:latest
+docker run -p 8080:8080 ghcr.io/apl-uw-software/microswift-dashboard:latest
+```
+
+To run a pre-build container in Podman:
+```shell
+podman pull ghcr.io/apl-uw-software/microswift-dashboard:latest
+podman run -p 8080:8080 ghcr.io/apl-uw-software/microswift-dashboard:latest
 ```
 
 # Deployment
