@@ -12,7 +12,6 @@ jobs:
   build:
     if: ${{ vars.BUILD_AND_PUSH == 'true' }}
     runs-on:
-      group: Public Repo Runners
       labels: [ubuntu-latest]
     # Add permissions needed for GitHub Container Registry
     permissions:
