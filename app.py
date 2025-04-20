@@ -25,6 +25,10 @@ app.title = "Dashboard"
 
 server = app.server
 
+# Set the default mission to the first mission in the list.
+all_missions = get_missions()
+default_mission = all_missions[0]['value']
+
 # Define the layout of the app
 app.layout = html.Div(
     [
@@ -39,8 +43,8 @@ app.layout = html.Div(
                             ),
                             html.Hr(),
                             dcc.Dropdown(
-                                options=get_missions(),
-                                value="Bering Sea June 2024",
+                                options=all_missions,
+                                value=default_mission,
                                 id="mission_dropdown",
                             ),
                             html.Br(),
