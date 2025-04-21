@@ -27,7 +27,7 @@ server = app.server
 
 # Set the default mission to the first mission in the list.
 all_missions = get_missions()
-default_mission = all_missions[0]['value']
+default_mission = all_missions[0]["value"]
 
 # Define the layout of the app
 app.layout = html.Div(
@@ -50,13 +50,6 @@ app.layout = html.Div(
                             html.Br(),
                             dcc.Dropdown(id="buoy_id"),
                             html.Br(),
-                            html.Div(
-                                [
-                                    html.P("Time Selection | Frequency v Energy"),
-                                    dcc.Dropdown(id="time_dropdown"),
-                                ],
-                                id="time_selection",
-                            ),
                             html.Hr(),
                             dbc.Card(id="latest_info", body=True),
                             html.Footer("Version 0.8"),
@@ -108,17 +101,15 @@ def update_ids(mission):
     [
         Output("graph_area", "children"),
         Output("latest_info", "children"),
-        Output("time_selection", "style"),
     ],
     [Input("buoy_id", "value")],
 )
 def update_layout(buoy_id):
     if buoy_id == "All":
-        style = {"display": "none"}
-        return multi_layout, multi_info_card, style
+        return multi_layout, multi_info_card
     else:
         style = {"display": "block"}
-        return single_layout, single_info_card, style
+        return single_layout, single_info_card
 
 
 # Update multi-buoy graphs
@@ -145,24 +136,6 @@ def update_multi(buoy_id, mission):
     return no_update, no_update, no_update, no_update
 
 
-# Update time dropdown options for single buoy
-@callback(
-    [Output("time_dropdown", "options"), Output("time_dropdown", "value")],
-    [Input("buoy_id", "value"), Input("mission_dropdown", "value")],
-)
-def update_time_dropdown(buoy_id, mission):
-    if buoy_id != "All":
-        start_date, end_date = get_mission_time(mission)
-        df = get_swift_data([buoy_id], start_date, end_date)
-        if df is not None:
-            df["times"] = pd.to_datetime(df["time"])
-            date_strings = df["times"].dt.strftime("%Y-%m-%d %H:%M:%S%z").tolist()
-            options = [{"label": date, "value": date} for date in date_strings]
-            value = date_strings[0]
-            return options, value
-    return no_update, no_update
-
-
 # Update single buoy graphs and info
 @callback(
     [
@@ -181,10 +154,9 @@ def update_time_dropdown(buoy_id, mission):
     [
         Input("buoy_id", "value"),
         Input("mission_dropdown", "value"),
-        Input("time_dropdown", "value"),
     ],
 )
-def update_single(buoy_id, mission, selected_time_str):
+def update_single(buoy_id, mission):
     if buoy_id != "All":
         start_date, end_date = get_mission_time(mission)
         df = get_swift_data([buoy_id], start_date, end_date)
@@ -198,7 +170,7 @@ def update_single(buoy_id, mission, selected_time_str):
             spectrogram_fig=no_update,
         )
         if df is not None:
-            single_graphs = get_single_graphs(df, buoy_id, selected_time_str)
+            single_graphs = get_single_graphs(df)
             # Info Card
             single_graphs.current_id = buoy_id
             single_graphs.buoy_info = single_card(df, buoy_id)
