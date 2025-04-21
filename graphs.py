@@ -63,7 +63,7 @@ class SingleGraphs:
         self.buoy_info = no_update
 
 
-def get_single_graphs(df, buoy_id, selected_time_str) -> SingleGraphs:
+def get_single_graphs(df) -> SingleGraphs:
     # Time Series Graphs
     # peak_direction = px.line(df, x='time', y='peak_direction', title='Peak Direction Over Time')
     # peak_period = px.line(df, x='time', y='peak_period', title='Peak Period Over Time')
@@ -100,30 +100,6 @@ def get_single_graphs(df, buoy_id, selected_time_str) -> SingleGraphs:
         title="Wave Height by Position",
         hover_data=hover_data,
     )
-
-    # Frequency vs Energy Graphs
-    selected_time = pd.to_datetime(selected_time_str)
-    plot_df = pd.DataFrame(
-        {
-            "Frequency (Hz)": df.loc[(buoy_id, selected_time), "frequency"],
-            "Energy Density": df.loc[(buoy_id, selected_time), "energy_density"],
-        }
-    )
-
-    # loglog = px.line(
-    #     plot_df,
-    #     x="Frequency (Hz)",
-    #     y="Energy Density",
-    #     title="Energy Density vs. Frequency (LogLog)",
-    #     log_x=True,
-    #     log_y=True,
-    # )
-    # linear = px.line(
-    #     plot_df,
-    #     x="Frequency (Hz)",
-    #     y="Energy Density",
-    #     title="Energy Density vs. Frequency (Linear)",
-    # )
 
     # Spectrogram
     spectrogram_fig = spectrogram(df)
