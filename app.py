@@ -27,7 +27,7 @@ server = app.server
 
 # Set the default mission to the first mission in the list.
 all_missions = get_missions()
-default_mission = all_missions[0]['value']
+default_mission = all_missions[0]["value"]
 
 # Define the layout of the app
 app.layout = html.Div(
