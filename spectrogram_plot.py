@@ -8,6 +8,9 @@ def spectrogram(microswift_df):
     time_1d = microswift_df["time"]
     time_2d = np.tile(time_1d, (frequency_2d.shape[1], 1)).T
 
+    # Replace zero or negative values with a small positive value (e.g., 1e-10)
+    energy_density_2d[energy_density_2d <= 0] = 1e-10
+
     fig = go.Figure(
         data=go.Heatmap(
             x=frequency_2d.flatten(),
