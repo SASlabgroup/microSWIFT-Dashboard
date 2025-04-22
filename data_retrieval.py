@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime, timezone
 import microSWIFTtelemetry
 from data_cleaning import clean_data
 
@@ -22,8 +23,13 @@ def get_swift_data(buoy_ids, start_date, end_date=None):
 
     for buoy_id in buoy_ids:
         if end_date is None:
+            # Must specify an end date because default parameters are evaluated once at function definition
+            # and not each time the function is called.
             data, error = microSWIFTtelemetry.pull_telemetry_as_var(
-                buoy_id, start_date, var_type="pandas"
+                buoy_id,
+                start_date,
+                datetime.now(timezone.utc),
+                var_type="pandas",
             )
         else:
             data, error = microSWIFTtelemetry.pull_telemetry_as_var(

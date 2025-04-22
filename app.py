@@ -157,18 +157,19 @@ def update_multi(buoy_id, mission):
     ],
 )
 def update_single(buoy_id, mission):
+    single_graphs = SingleGraphs(
+        wave_height=no_update,
+        position_temperature=no_update,
+        position_salinity=no_update,
+        position_height=no_update,
+        loglog=no_update,
+        linear=no_update,
+        spectrogram_fig=no_update,
+    )
     if buoy_id != "All":
         start_date, end_date = get_mission_time(mission)
         df = get_swift_data([buoy_id], start_date, end_date)
-        single_graphs = SingleGraphs(
-            wave_height=no_update,
-            position_temperature=no_update,
-            position_salinity=no_update,
-            position_height=no_update,
-            loglog=no_update,
-            linear=no_update,
-            spectrogram_fig=no_update,
-        )
+
         if df is not None:
             single_graphs = get_single_graphs(df)
             # Info Card
