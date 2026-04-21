@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3-slim
+FROM python:3.14.4-slim-trixie
 
 # Set the working directory in the container
 WORKDIR /app
