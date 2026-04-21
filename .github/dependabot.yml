@@ -13,8 +13,8 @@ updates:
  - package-ecosystem: "pip"
    directory: "/"
    schedule:
-    interval: daily
+     interval: daily
  - package-ecosystem: "docker"
    directory: "/"
    schedule:
-    interval: daily
+     interval: daily
