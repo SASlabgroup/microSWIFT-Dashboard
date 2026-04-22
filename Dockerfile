@@ -1,6 +1,8 @@
 # Use an official Python runtime as a parent image
 FROM python:3.14.4-slim-trixie
 
+LABEL org.opencontainers.image.source="https://github.com/SASlabgroup/microSWIFT-Dashboard"
+
 # Set the working directory in the container
 WORKDIR /app
 
