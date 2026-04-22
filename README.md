@@ -65,15 +65,23 @@ podman compose up
 ## Running a pre-built container
 To run a pre-built container in Docker:
 ```shell
-docker pull ghcr.io/apl-uw-software/microswift-dashboard:latest
-docker run -p 8080:8080 ghcr.io/apl-uw-software/microswift-dashboard:latest
+docker pull ghcr.io/saslabgroup/microswift-dashboard:latest
+docker run -p 8080:8080 ghcr.io/saslabgroup/microswift-dashboard:latest
 ```
 
 To run a pre-build container in Podman:
 ```shell
-podman pull ghcr.io/apl-uw-software/microswift-dashboard:latest
-podman run -p 8080:8080 ghcr.io/apl-uw-software/microswift-dashboard:latest
+podman pull ghcr.io/saslabgroup/microswift-dashboard:latest
+podman run -p 8080:8080 ghcr.io/saslabgroup/microswift-dashboard:latest
 ```
+
+For automated dependency updates in downstream repositories, pin immutable release tags instead of latest:
+
+```shell
+ghcr.io/saslabgroup/microswift-dashboard:v1.2.3
+```
+
+Release tags are published from stable Git tags in this repository using the format vX.Y.Z.
 
 # Deployment
 While Dash recommends using Heroku for deployment, we suggest using Render for its simplicity. For deployment on Render, follow their <a href="https://github.com/thusharabandara/dash-app-render-deployment">deployment guide</a>. <b>Note:</b> You will need to create a Render account.
