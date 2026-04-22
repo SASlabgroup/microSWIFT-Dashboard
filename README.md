@@ -69,7 +69,7 @@ docker pull ghcr.io/saslabgroup/microswift-dashboard:latest
 docker run -p 8080:8080 ghcr.io/saslabgroup/microswift-dashboard:latest
 ```
 
-To run a pre-build container in Podman:
+To run a pre-built container in Podman:
 ```shell
 podman pull ghcr.io/saslabgroup/microswift-dashboard:latest
 podman run -p 8080:8080 ghcr.io/saslabgroup/microswift-dashboard:latest
