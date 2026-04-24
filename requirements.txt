@@ -17,7 +17,7 @@ itsdangerous==2.2.0
 Jinja2==3.1.6
 kiwisolver==1.5.0
 MarkupSafe==3.0.3
-matplotlib==3.10.8
+matplotlib==3.10.9
 microSWIFTtelemetry==0.3.7
 narwhals==2.20.0
 nest-asyncio==1.6.0
