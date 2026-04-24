@@ -11,7 +11,7 @@ fonttools==4.62.1
 gitdb==4.0.12
 GitPython==3.1.47
 gunicorn==25.3.0
-idna==3.12
+idna==3.13
 importlib_metadata==9.0.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
