@@ -20,7 +20,7 @@ def multi_card(df, buoy_ids):
 
         if recent_data is not None:
             formatted_time = recent_data["time"]
-            card_content = f"ID: {buoy_id} | {formatted_time}"
+            card_content = f"ID: {buoy_id} | Timestamp: {formatted_time}"
             cards.extend([html.P(card_content), html.Br()])
         else:
             card_content = f"ID: {buoy_id} | Data not found"
@@ -47,11 +47,11 @@ def single_card(df, buoy_id):
     if recent_data is not None:
         card_content = html.P(
             [
-                f'Significant Wave Height: {recent_data["significant_height"]:.3f}',
+                f'Significant Wave Height: {recent_data["significant_height"]:.3f}m',
                 html.Br(),
-                f'Peak Period: {recent_data["peak_period"]:.3f}',
+                f'Peak Period: {recent_data["peak_period"]:.3f}s',
                 html.Br(),
-                f'Peak Direction: {recent_data["peak_direction"]:.3f}',
+                f'Peak Direction: {recent_data["peak_direction"]:.3f}° (from)',
                 html.Br(),
                 f'Timestamp: {recent_data["time"]}',
             ]

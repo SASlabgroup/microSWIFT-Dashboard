@@ -55,7 +55,7 @@ app.layout = html.Div(
                             html.Footer("Version 0.8"),
                         ]
                     ),
-                    width=2,
+                    width=3,
                     style={
                         "background-color": "grey",
                         "padding": "10px",
@@ -75,7 +75,7 @@ app.layout = html.Div(
                             "background-color": "#f8f9fa",
                         },
                     ),
-                    width={"size": 10, "offset": 2},
+                    width={"size": 9, "offset": 3},
                 ),
             ]
         )
