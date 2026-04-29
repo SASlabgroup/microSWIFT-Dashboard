@@ -11,5 +11,12 @@ def clean_data(data):
     if "latitude" in data.columns and "longitude" in data.columns:
         # Drop rows where both latitude and longitude are 0
         data = data.loc[~((data["latitude"] == 0) & (data["longitude"] == 0))]
+        data = data.dropna(subset=["latitude", "longitude"])
+        data = data.loc[
+            (data["latitude"] >= -90)
+            & (data["latitude"] <= 90)
+            & (data["longitude"] >= -180)
+            & (data["longitude"] <= 180)
+        ]
 
     return data

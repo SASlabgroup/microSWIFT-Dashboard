@@ -11,37 +11,68 @@ POSITION_LABELS = {
 }
 
 
-def multi_graphs(df):
+def _style_position_map(fig):
+    fig.update_geos(
+        projection_type="natural earth",
+        fitbounds="locations",
+        showcoastlines=True,
+        coastlinecolor="black",
+        coastlinewidth=1,
+        showland=True,
+        landcolor="rgb(232, 228, 216)",
+        showocean=True,
+        oceancolor="rgb(214, 230, 244)",
+        showlakes=True,
+        lakecolor="rgb(214, 230, 244)",
+    )
+    fig.update_layout(margin={"l": 10, "r": 10, "t": 40, "b": 10})
+    return fig
+
+
+def _build_position_hover_data(df):
     hover_data = {"time": True}  # Add time to the hover data
+    if "Buoy ID" in df.columns:
+        hover_data["Buoy ID"] = True
+    return hover_data
 
-    position_temperature = px.scatter(
+
+def _build_position_map(df, hover_data, color, title, label):
+    fig = px.scatter_geo(
         df,
-        x="longitude",
-        y="latitude",
-        color="temperature",
-        title="Temperature by Position",
+        lon="longitude",
+        lat="latitude",
+        color=color,
+        title=title,
         hover_data=hover_data,
-        labels={**POSITION_LABELS, "temperature": "Temperature (°C)"},
+        labels={**POSITION_LABELS, color: label},
+    )
+    return _style_position_map(fig)
+
+
+def multi_graphs(df):
+    hover_data = _build_position_hover_data(df)
+    position_temperature = _build_position_map(
+        df,
+        hover_data,
+        "temperature",
+        "Temperature by Position",
+        "Temperature (°C)",
     )
 
-    position_salinity = px.scatter(
+    position_salinity = _build_position_map(
         df,
-        x="longitude",
-        y="latitude",
-        color="salinity",
-        title="Salinity by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "salinity": "Salinity (PSU)"},
+        hover_data,
+        "salinity",
+        "Salinity by Position",
+        "Salinity (PSU)",
     )
 
-    position_height = px.scatter(
+    position_height = _build_position_map(
         df,
-        x="longitude",
-        y="latitude",
-        color="significant_height",
-        title="Wave Height by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "significant_height": "Significant Wave Height (m)"},
+        hover_data,
+        "significant_height",
+        "Wave Height by Position",
+        "Significant Wave Height (m)",
     )
 
     return position_temperature, position_salinity, position_height
@@ -86,36 +117,30 @@ def get_single_graphs(df) -> SingleGraphs:
     )
 
     # Position Graphs
-    hover_data = {"time": True}  # Add time to the hover data
+    hover_data = _build_position_hover_data(df)
 
-    position_temperature = px.scatter(
+    position_temperature = _build_position_map(
         df,
-        x="longitude",
-        y="latitude",
-        color="temperature",
-        title="Temperature by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "temperature": "Temperature (°C)"},
+        hover_data,
+        "temperature",
+        "Temperature by Position",
+        "Temperature (°C)",
     )
 
-    position_salinity = px.scatter(
+    position_salinity = _build_position_map(
         df,
-        x="longitude",
-        y="latitude",
-        color="salinity",
-        title="Salinity by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "salinity": "Salinity (PSU)"},
+        hover_data,
+        "salinity",
+        "Salinity by Position",
+        "Salinity (PSU)",
     )
 
-    position_height = px.scatter(
+    position_height = _build_position_map(
         df,
-        x="longitude",
-        y="latitude",
-        color="significant_height",
-        title="Wave Height by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "significant_height": "Significant Wave Height (m)"},
+        hover_data,
+        "significant_height",
+        "Wave Height by Position",
+        "Significant Wave Height (m)",
     )
 
     # Spectrogram
