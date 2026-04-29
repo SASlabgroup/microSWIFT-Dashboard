@@ -29,43 +29,51 @@ def _style_position_map(fig):
     return fig
 
 
-def multi_graphs(df):
+def _build_position_hover_data(df):
     hover_data = {"time": True}  # Add time to the hover data
     if "Buoy ID" in df.columns:
         hover_data["Buoy ID"] = True
+    return hover_data
 
-    position_temperature = px.scatter_geo(
+
+def _build_position_map(df, hover_data, color, title, label):
+    fig = px.scatter_geo(
         df,
         lon="longitude",
         lat="latitude",
-        color="temperature",
-        title="Temperature by Position",
+        color=color,
+        title=title,
         hover_data=hover_data,
-        labels={**POSITION_LABELS, "temperature": "Temperature (°C)"},
+        labels={**POSITION_LABELS, color: label},
     )
-    position_temperature = _style_position_map(position_temperature)
+    return _style_position_map(fig)
 
-    position_salinity = px.scatter_geo(
-        df,
-        lon="longitude",
-        lat="latitude",
-        color="salinity",
-        title="Salinity by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "salinity": "Salinity (PSU)"},
-    )
-    position_salinity = _style_position_map(position_salinity)
 
-    position_height = px.scatter_geo(
+def multi_graphs(df):
+    hover_data = _build_position_hover_data(df)
+    position_temperature = _build_position_map(
         df,
-        lon="longitude",
-        lat="latitude",
-        color="significant_height",
-        title="Wave Height by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "significant_height": "Significant Wave Height (m)"},
+        hover_data,
+        "temperature",
+        "Temperature by Position",
+        "Temperature (°C)",
     )
-    position_height = _style_position_map(position_height)
+
+    position_salinity = _build_position_map(
+        df,
+        hover_data,
+        "salinity",
+        "Salinity by Position",
+        "Salinity (PSU)",
+    )
+
+    position_height = _build_position_map(
+        df,
+        hover_data,
+        "significant_height",
+        "Wave Height by Position",
+        "Significant Wave Height (m)",
+    )
 
     return position_temperature, position_salinity, position_height
 
@@ -109,42 +117,31 @@ def get_single_graphs(df) -> SingleGraphs:
     )
 
     # Position Graphs
-    hover_data = {"time": True}  # Add time to the hover data
-    if "Buoy ID" in df.columns:
-        hover_data["Buoy ID"] = True
+    hover_data = _build_position_hover_data(df)
 
-    position_temperature = px.scatter_geo(
+    position_temperature = _build_position_map(
         df,
-        lon="longitude",
-        lat="latitude",
-        color="temperature",
-        title="Temperature by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "temperature": "Temperature (°C)"},
+        hover_data,
+        "temperature",
+        "Temperature by Position",
+        "Temperature (°C)",
     )
-    position_temperature = _style_position_map(position_temperature)
 
-    position_salinity = px.scatter_geo(
+    position_salinity = _build_position_map(
         df,
-        lon="longitude",
-        lat="latitude",
-        color="salinity",
-        title="Salinity by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "salinity": "Salinity (PSU)"},
+        hover_data,
+        "salinity",
+        "Salinity by Position",
+        "Salinity (PSU)",
     )
-    position_salinity = _style_position_map(position_salinity)
 
-    position_height = px.scatter_geo(
+    position_height = _build_position_map(
         df,
-        lon="longitude",
-        lat="latitude",
-        color="significant_height",
-        title="Wave Height by Position",
-        hover_data=hover_data,
-        labels={**POSITION_LABELS, "significant_height": "Significant Wave Height (m)"},
+        hover_data,
+        "significant_height",
+        "Wave Height by Position",
+        "Significant Wave Height (m)",
     )
-    position_height = _style_position_map(position_height)
 
     # Spectrogram
     spectrogram_fig = spectrogram(df)
