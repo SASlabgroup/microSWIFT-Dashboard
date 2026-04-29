@@ -3,6 +3,13 @@ import plotly.express as px
 from dash import no_update
 from spectrogram_plot import spectrogram
 
+# Shared labels for position-based scatter plots
+POSITION_LABELS = {
+    "longitude": "Longitude (°)",
+    "latitude": "Latitude (°)",
+    "time": "Time (UTC)",
+}
+
 
 def _style_position_map(fig):
     fig.update_geos(
@@ -34,6 +41,7 @@ def multi_graphs(df):
         color="temperature",
         title="Temperature by Position",
         hover_data=hover_data,
+        labels={**POSITION_LABELS, "temperature": "Temperature (°C)"},
     )
     position_temperature = _style_position_map(position_temperature)
 
@@ -44,6 +52,7 @@ def multi_graphs(df):
         color="salinity",
         title="Salinity by Position",
         hover_data=hover_data,
+        labels={**POSITION_LABELS, "salinity": "Salinity (PSU)"},
     )
     position_salinity = _style_position_map(position_salinity)
 
@@ -54,6 +63,7 @@ def multi_graphs(df):
         color="significant_height",
         title="Wave Height by Position",
         hover_data=hover_data,
+        labels={**POSITION_LABELS, "significant_height": "Significant Wave Height (m)"},
     )
     position_height = _style_position_map(position_height)
 
@@ -88,10 +98,14 @@ class SingleGraphs:
 
 def get_single_graphs(df) -> SingleGraphs:
     # Time Series Graphs
-    # peak_direction = px.line(df, x='time', y='peak_direction', title='Peak Direction Over Time')
-    # peak_period = px.line(df, x='time', y='peak_period', title='Peak Period Over Time')
+    # peak_direction = px.line(df, x='time', y='peak_direction', title='Peak Direction Over Time', labels={'time': 'Time (UTC)', 'peak_direction': 'Peak Wave Direction (° from)'})
+    # peak_period = px.line(df, x='time', y='peak_period', title='Peak Period Over Time', labels={'time': 'Time (UTC)', 'peak_period': 'Peak Wave Period (s)'})
     wave_height = px.line(
-        df, x="time", y="significant_height", title="Wave Height Over Time"
+        df,
+        x="time",
+        y="significant_height",
+        title="Wave Height Over Time",
+        labels={"time": "Time (UTC)", "significant_height": "Significant Wave Height (m)"},
     )
 
     # Position Graphs
@@ -106,6 +120,7 @@ def get_single_graphs(df) -> SingleGraphs:
         color="temperature",
         title="Temperature by Position",
         hover_data=hover_data,
+        labels={**POSITION_LABELS, "temperature": "Temperature (°C)"},
     )
     position_temperature = _style_position_map(position_temperature)
 
@@ -116,6 +131,7 @@ def get_single_graphs(df) -> SingleGraphs:
         color="salinity",
         title="Salinity by Position",
         hover_data=hover_data,
+        labels={**POSITION_LABELS, "salinity": "Salinity (PSU)"},
     )
     position_salinity = _style_position_map(position_salinity)
 
@@ -126,6 +142,7 @@ def get_single_graphs(df) -> SingleGraphs:
         color="significant_height",
         title="Wave Height by Position",
         hover_data=hover_data,
+        labels={**POSITION_LABELS, "significant_height": "Significant Wave Height (m)"},
     )
     position_height = _style_position_map(position_height)
 
