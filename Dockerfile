@@ -5,6 +5,8 @@ LABEL org.opencontainers.image.source="https://github.com/SASlabgroup/microSWIFT
 
 # Set the working directory in the container
 WORKDIR /app
+ARG APP_VERSION=DEV
+ENV APP_VERSION=${APP_VERSION}
 
 # Copy the current directory contents into the container at /app
 COPY . /app
