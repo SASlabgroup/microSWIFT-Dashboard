@@ -1,3 +1,5 @@
+import os
+
 from dash import Dash, html, dcc, callback, Output, Input, no_update, ALL
 import dash_bootstrap_components as dbc
 
@@ -24,6 +26,7 @@ app = Dash(
 app.title = "Dashboard"
 
 server = app.server
+APP_VERSION = os.getenv("APP_VERSION", "DEV")
 
 # Set the default mission to the first mission in the list.
 all_missions = get_missions()
@@ -52,7 +55,7 @@ app.layout = html.Div(
                             html.Br(),
                             html.Hr(),
                             dbc.Card(id="latest_info", body=True),
-                            html.Footer("Version 0.8"),
+                            html.Footer(f"Version {APP_VERSION}"),
                         ]
                     ),
                     width=3,
