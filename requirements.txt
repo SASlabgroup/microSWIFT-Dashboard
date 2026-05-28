@@ -11,7 +11,7 @@ fonttools==4.62.1
 gitdb==4.0.12
 GitPython==3.1.50
 gunicorn==26.0.0
-idna==3.14
+idna==3.15
 importlib_metadata==9.0.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
@@ -21,14 +21,14 @@ matplotlib==3.10.9
 microSWIFTtelemetry==0.3.7
 narwhals==2.21.2
 nest-asyncio==1.6.0
-numpy==2.4.4
+numpy==2.4.5
 packaging==26.2
 pandas==3.0.3
 pillow==12.2.0
 plotly==6.7.0
 pyparsing==3.3.2
 python-dateutil==2.9.0.post0
-requests==2.34.0
+requests==2.34.2
 retrying==1.4.2
 setuptools==82.0.1
 six==1.17.0
