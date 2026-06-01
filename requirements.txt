@@ -37,4 +37,4 @@ typing_extensions==4.15.0
 urllib3==2.7.0
 Werkzeug==3.1.8
 xarray==2026.4.0
-zipp==3.23.1
+zipp==4.1.0
