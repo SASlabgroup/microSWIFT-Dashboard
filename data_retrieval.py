@@ -25,16 +25,12 @@ def get_swift_data(buoy_ids, start_date, end_date=None):
         if end_date is None:
             # Must specify an end date because default parameters are evaluated once at function definition
             # and not each time the function is called.
-            try:
-                data, error = microSWIFTtelemetry.pull_telemetry_as_var(
-                    buoy_id,
-                    start_date,
-                    datetime.now(timezone.utc),
-                    var_type="pandas",
-                )
-            except Exception as e:
-                print(f"Error retrieving data for buoy ID {buoy_id}: {e}")
-                data, error = pd.DataFrame(), str(e)
+            data, error = microSWIFTtelemetry.pull_telemetry_as_var(
+                buoy_id,
+                start_date,
+                datetime.now(timezone.utc),
+                var_type="pandas",
+            )
         else:
             data, error = microSWIFTtelemetry.pull_telemetry_as_var(
                 buoy_id, start_date, end_date, var_type="pandas"
