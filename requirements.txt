@@ -23,7 +23,7 @@ narwhals==2.24.0
 nest-asyncio==1.6.0
 numpy==2.5.1
 packaging==26.2
-pandas==3.0.3
+pandas==3.0.5
 pillow==12.3.0
 plotly==6.9.0
 pyparsing==3.3.2
