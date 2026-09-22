@@ -32,7 +32,7 @@ setuptools==84.0.0
 six==1.17.0
 smmap==5.0.3
 typing_extensions==4.16.0
-urllib3==2.7.0
+urllib3==2.8.0
 Werkzeug==3.1.8
 xarray==2026.7.0
 zipp==4.1.0
