@@ -24,7 +24,7 @@ packaging==26.3
 pandas==3.0.6
 pillow==12.3.0
 plotly==7.1.0
-pyparsing==3.3.2
+pyparsing==3.3.3
 python-dateutil==2.9.0.post0
 requests==2.34.2
 retrying==1.4.2
