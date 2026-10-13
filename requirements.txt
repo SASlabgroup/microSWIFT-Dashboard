@@ -14,7 +14,7 @@ importlib_metadata==9.0.1
 itsdangerous==2.2.0
 Jinja2==3.1.6
 kiwisolver==1.5.1
-MarkupSafe==3.0.3
+MarkupSafe==3.0.4
 matplotlib==3.11.2
 microSWIFTtelemetry==0.3.7
 narwhals==2.26.0
