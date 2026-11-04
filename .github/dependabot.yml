@@ -9,12 +9,24 @@ updates:
  - package-ecosystem: "devcontainers"
    directory: "/"
    schedule:
-     interval: weekly
+     interval: monthly
+   groups:
+     monthly-batch:
+       patterns:
+         - "*"
  - package-ecosystem: "pip"
    directory: "/"
    schedule:
-     interval: daily
+     interval: monthly
+   groups:
+     monthly-batch:
+       patterns:
+         - "*"
  - package-ecosystem: "docker"
    directory: "/"
    schedule:
-     interval: daily
+     interval: monthly
+   groups:
+     monthly-batch:
+       patterns:
+         - "*"
